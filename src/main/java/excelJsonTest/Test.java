@@ -20,15 +20,14 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 public class Test {
 
 	public static void main(String[] args) throws InvalidFormatException, IOException {
-		InputStream inp = new FileInputStream("src/main/resources/excel.xls");
+		InputStream inp = new FileInputStream("src/main/resources/kontotest.xls");
 		Workbook wb = WorkbookFactory.create(inp);
 		Sheet sheet = wb.getSheetAt(0);
 		
 		ArrayList stringArr = new ArrayList();
 		ArrayList intArr = new ArrayList();
 		
-		Row row0 = sheet.getRow(0);
-		Row row1 = sheet.getRow(1);
+		Row row0 = sheet.getRow(7);
 		
 		
 			
@@ -46,7 +45,10 @@ public class Test {
 		
 		
 		for(int i = 0; i<stringArr.size(); i++ ) {
-			System.out.println(stringArr.get(i));
+			if(!stringArr.get(i).equals("")) {
+				System.out.println(stringArr.get(i));
+			}
+			
 		}
 		
 	}
