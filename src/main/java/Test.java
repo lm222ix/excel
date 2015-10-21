@@ -1,5 +1,3 @@
-package excelJsonTest;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -25,7 +23,6 @@ public class Test {
 		Sheet sheet = wb.getSheetAt(0);
 		
 		ArrayList stringArr = new ArrayList();
-		ArrayList intArr = new ArrayList();
 		
 		Row row0 = sheet.getRow(7);
 		
@@ -46,7 +43,7 @@ public class Test {
 		
 		for(int i = 0; i<stringArr.size(); i++ ) {
 			if(!stringArr.get(i).equals("")) {
-				System.out.println(stringArr.get(i));
+				System.out.println(stringArr.get(i).toString());
 			}
 			
 		}
