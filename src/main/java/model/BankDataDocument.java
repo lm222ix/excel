@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -15,17 +17,15 @@ public class BankDataDocument {
 
 	//Fields
 	private InputStream inp;
-	private Workbook wb;
-	private Sheet sheet;
+	private HSSFWorkbook wb;
+	private HSSFSheet sheet;
 	private int startingRow;
-	private ArrayList<Purchase> purchases;
 	
 	public BankDataDocument(String filePath, int startingRow) throws InvalidFormatException, IOException {
 		this.inp = new FileInputStream(filePath);
-		this.wb = WorkbookFactory.create(inp);
+		this.wb = new HSSFWorkbook(inp);
 		this.sheet = wb.getSheetAt(0);
 		this.startingRow = startingRow;
-		this.purchases = new ArrayList<Purchase>();
 	}
 
 
@@ -39,19 +39,19 @@ public class BankDataDocument {
 		this.inp = inp;
 	}
 
-	public Workbook getWb() {
+	public HSSFWorkbook getWb() {
 		return wb;
 	}
 
-	public void setWb(Workbook wb) {
+	public void setWb(HSSFWorkbook wb) {
 		this.wb = wb;
 	}
 
-	public Sheet getSheet() {
+	public HSSFSheet getSheet() {
 		return sheet;
 	}
 
-	public void setSheet(Sheet sheet) {
+	public void setSheet(HSSFSheet sheet) {
 		this.sheet = sheet;
 	}
 
@@ -61,13 +61,5 @@ public class BankDataDocument {
 
 	public void setStartingRow(int startingRow) {
 		this.startingRow = startingRow;
-	}
-
-	public ArrayList<Purchase> getPurchases() {
-		return purchases;
-	}
-
-	public void setPurchases(ArrayList<Purchase> purchases) {
-		this.purchases = purchases;
 	}
 }
