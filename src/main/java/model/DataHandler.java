@@ -69,22 +69,21 @@ public class DataHandler {
         while(rowIterator.hasNext()) {
             Row currentRow = rowIterator.next();
             try {
-
                 try {
                     date = currentRow.getCell(2).getStringCellValue().trim();
                     chargerName = currentRow.getCell(4).getStringCellValue().trim();
                     amount = currentRow.getCell(6).getNumericCellValue();
-                    balance = currentRow.getCell(8).getNumericCellValue();
+                    //balance = currentRow.getCell(8).getNumericCellValue();
                     if (date != null && chargerName != null && !date.isEmpty() && !chargerName.isEmpty()) {
-                        Purchase p = new Purchase(date, amount, chargerName, balance);
+                        Purchase p = new Purchase(date, amount, chargerName, 0);
                         m_purchases.add(p);
                     }
                 } catch (NullPointerException e) {
-                    // System.out.println(e.getMessage());
+                     System.out.println(e.getMessage());
                 }
 
             } catch(IllegalStateException ex) {
-                // System.out.println(ex.getMessage());
+                 System.out.println(ex.getMessage());
             }
 
 
@@ -96,6 +95,22 @@ public class DataHandler {
         for(Purchase p : m_purchases) {
             System.out.println(p.toString());
         }
+    }
+
+
+    public double getTotalOut() {
+        double total = 0;
+        for(Charger c : m_chargers) {
+            total += c.getChargerOutcome();
+        }
+        return total;
+    }
+    public double getTotalIn() {
+        double total = 0;
+        for(Charger c : m_chargers) {
+            total += c.getChargerIncome();
+        }
+        return total;
     }
 
 
