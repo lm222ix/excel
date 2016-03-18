@@ -12,7 +12,7 @@ import java.util.Iterator;
 /**
  * Created by Ludde on 2015-10-21.
  */
-public class DataHandler {
+public class CollectedDataObject {
 
     private ArrayList<Purchase> m_purchases;
     private ArrayList<Charger> m_chargers;
@@ -20,7 +20,7 @@ public class DataHandler {
 
     final DecimalFormat df = new DecimalFormat("####0.00");
 
-    public DataHandler(BankDataDocument doc) {
+    public CollectedDataObject(BankDataDocument doc) {
         this.m_purchases = new ArrayList<Purchase>();
         this.m_chargers = new ArrayList<Charger>();
         this.m_document = doc;
@@ -64,7 +64,6 @@ public class DataHandler {
         String date;
         String chargerName;
         double amount;
-        double balance;
 
         while(rowIterator.hasNext()) {
             Row currentRow = rowIterator.next();
@@ -75,20 +74,16 @@ public class DataHandler {
                     amount = currentRow.getCell(6).getNumericCellValue();
                     //balance = currentRow.getCell(8).getNumericCellValue();
                     if (date != null && chargerName != null && !date.isEmpty() && !chargerName.isEmpty()) {
-                        Purchase p = new Purchase(date, amount, chargerName, 0);
+                        Purchase p = new Purchase(date, amount, chargerName);
                         m_purchases.add(p);
                     }
                 } catch (NullPointerException e) {
                      System.out.println(e.getMessage());
                 }
-
             } catch(IllegalStateException ex) {
                  System.out.println(ex.getMessage());
             }
-
-
         }
-
     }
 
     public void printPurchases() {
@@ -96,7 +91,6 @@ public class DataHandler {
             System.out.println(p.toString());
         }
     }
-
 
     public double getTotalOut() {
         double total = 0;
@@ -112,7 +106,6 @@ public class DataHandler {
         }
         return total;
     }
-
 
     public void print() {
         Collections.sort(m_chargers);
