@@ -20,8 +20,10 @@ public class BankDataDocument {
 	private HSSFWorkbook wb;
 	private HSSFSheet sheet;
 	private int startingRow;
+	private String filePath;
 	
 	public BankDataDocument(String filePath, int startingRow) throws InvalidFormatException, IOException {
+		this.filePath = filePath;
 		this.inp = new FileInputStream(filePath);
 		this.wb = new HSSFWorkbook(inp);
 		this.sheet = wb.getSheetAt(0);
@@ -62,4 +64,5 @@ public class BankDataDocument {
 	public void setStartingRow(int startingRow) {
 		this.startingRow = startingRow;
 	}
+	public String getFilePath() {return this.filePath;}
 }

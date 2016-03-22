@@ -13,9 +13,9 @@ public class Test {
 
         CollectedDataObject collectedDataObject = new CollectedDataObject(doc);
                 collectedDataObject.readPurchasesFromFile();
-               // collectedDataObject.printPurchases();
+                collectedDataObject.printPurchases();
                collectedDataObject.mergeChargers();
-                //collectedDataObject.print();
+                collectedDataObject.print();
             System.out.println(collectedDataObject.getTotalIn());
             System.out.println(collectedDataObject.getTotalOut());
         }

@@ -1,8 +1,5 @@
 package model;
 
-/**
- * Created by Ludde on 2015-10-21.
- */
 public class Charger implements Comparable<Charger>{
 
     //Fields
@@ -51,7 +48,6 @@ public class Charger implements Comparable<Charger>{
     }
 
     public int compareTo(Charger c) {
-
         return (int) (this.getChargerTotal()- c.getChargerTotal());
     }
 

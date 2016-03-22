@@ -1,17 +1,12 @@
 package model;
 
-
+import GUI.AddNewListItemWindow;
 import org.apache.poi.ss.usermodel.Row;
-
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
-/**
- * Created by Ludde on 2015-10-21.
- */
 public class CollectedDataObject {
 
     private ArrayList<Purchase> m_purchases;
@@ -21,8 +16,8 @@ public class CollectedDataObject {
     final DecimalFormat df = new DecimalFormat("####0.00");
 
     public CollectedDataObject(BankDataDocument doc) {
-        this.m_purchases = new ArrayList<Purchase>();
-        this.m_chargers = new ArrayList<Charger>();
+        this.m_purchases = new ArrayList<>();
+        this.m_chargers = new ArrayList<>();
         this.m_document = doc;
     }
 
@@ -72,16 +67,15 @@ public class CollectedDataObject {
                     date = currentRow.getCell(2).getStringCellValue().trim();
                     chargerName = currentRow.getCell(4).getStringCellValue().trim();
                     amount = currentRow.getCell(6).getNumericCellValue();
-                    //balance = currentRow.getCell(8).getNumericCellValue();
                     if (date != null && chargerName != null && !date.isEmpty() && !chargerName.isEmpty()) {
                         Purchase p = new Purchase(date, amount, chargerName);
                         m_purchases.add(p);
                     }
                 } catch (NullPointerException e) {
-                     System.out.println(e.getMessage());
+                    //System.out.println(e.getMessage());
                 }
             } catch(IllegalStateException ex) {
-                 System.out.println(ex.getMessage());
+               // System.out.println(ex.getMessage());
             }
         }
     }
@@ -114,4 +108,24 @@ public class CollectedDataObject {
         }
     }
 
+    private String getFileName(String path) {
+        String[] arr = path.split("\\\\");
+        return arr[arr.length-1];
+    }
+
+    public String toString() {
+        return getFileName(m_document.getFilePath());
+    }
+
+    public ArrayList<Purchase> getM_purchases() {
+        return m_purchases;
+    }
+
+    public ArrayList<Charger> getM_chargers() {
+        return m_chargers;
+    }
+
+    public BankDataDocument getM_document() {
+        return m_document;
+    }
 }
